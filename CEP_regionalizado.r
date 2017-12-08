@@ -41,7 +41,7 @@ media.regionalizada = function(file, janela = 50, latlon = NA){
   media.media = NA
   media.desvpad = NA
   
-  if(is.na(latlon)){
+  if(any(is.na(latlon))){
     lonmin = min(file$Longitude)
     lonmax = max(file$Longitude)
     latmin = min(file$Latitude)
