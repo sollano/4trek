@@ -32,7 +32,7 @@ names(dados_lista)
 ## Teste da função media.regionalizada ####
 
 ## Calcular Média regionalizada
-trans.rep0 <- media.regionalizada(dados_lista[[1]], janela = 100 )
+trans.rep0 <- media.regionalizada(dados_lista[[1]], janela = 50 )
 trans.rep0
 
  ## Plotar a média regionalizada
@@ -43,7 +43,7 @@ mp + geom_raster(aes(fill=media)) + scale_fill_continuous(na.value = 'white' )
 
 ## Calcular os limites com as primeiras 5 medições
 trans.limites <- limites.naturais(referencia = dados_lista[[1]], 
-                                  lista.arquivos = dados_lista[2:3], janela =  100 )
+                                  lista.arquivos = dados_lista[2:3], janela =  50 )
 trans.limites 
 
 mp2 <- ggplot(data=trans.limites[["limites"]], aes(y=latitude, x=longitude))
