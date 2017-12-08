@@ -35,7 +35,7 @@ names(dados_lista)
 trans.rep0 <- media.regionalizada(dados_lista[[1]], janela = 100 )
 trans.rep0
 
-## Plotar a média regionalizada
+ ## Plotar a média regionalizada
 mp <- ggplot(data=trans.rep0[[ 2 ]], aes(y=latitude, x=longitude))
 mp + geom_raster(aes(fill=media)) + scale_fill_continuous(na.value = 'white' )
 
@@ -46,7 +46,7 @@ trans.limites <- limites.naturais(referencia = dados_lista[[1]],
                                   lista.arquivos = dados_lista[2:3], janela =  100 )
 trans.limites 
 
-mp2 <- ggplot(data=trans.limites[["limites"]], aes(y=lst.referencia..2...latitude, x=lst.referencia..2...longitude))
+mp2 <- ggplot(data=trans.limites[["limites"]], aes(y=latitude, x=longitude))
 mp2 + geom_raster(aes(fill=LNS)) + scale_fill_continuous(na.value = 'white' )
 
 ## Testar os limites com as medições 6 e 7
