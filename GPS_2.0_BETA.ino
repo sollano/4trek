@@ -37,7 +37,8 @@ void setup()
   File dataFile = SD.open("gps.txt", FILE_WRITE); // cria arquivo de dados
   if (dataFile) // abre o arquivo de banco de dados
   {
-  dataFile.println("-Latitude- , -Longitude- , --Data--  , --Hora-- , -Velocidade- , -Temperatura- , -Umidade- "); // escrever no cartão SD
+  //dataFile.println("-Latitude- , -Longitude- , --Data--  , --Hora-- , -Velocidade- , -Temperatura- , -Umidade- "); // escrever no cartão SD
+  dataFile.println("Latitude,Longitude,Data,Hora,Velocidade,Temperatura,Umidade"); // escrever no cartão SD
   }
   dataFile.close(); // fecha o arquivo de banco de dados 
 
@@ -100,19 +101,19 @@ void DadosGps() // função DadosGps, processamento dos dados do GPS
       //------- Velocidade - Cartao SD  
       //dataFile.print("Velocidade: "); // escrever no arquivo de banco de dados 
       dataFile.print(gps.speed.kmph()); // escrever no arquivo de banco de dados 
-      dataFile.print("km/h"); // escrever no arquivo de banco de dados 
+      //dataFile.print("km/h"); // escrever no arquivo de banco de dados 
       dataFile.print(F("   ,   "));  // escrever no arquivo de banco de dados 
 
       //------- Rumo/Azimute - Monitor Serial
     
       //------- Temperatura - Cartao SD  
       dataFile.print(t); // escrever no arquivo de banco de dados 
-      dataFile.print(" *C"); // escrever no arquivo de banco de dados 
+      //dataFile.print(" *C"); // escrever no arquivo de banco de dados 
       dataFile.print(F("    ,  ")); // escrever no arquivo de banco de dados 
 
       //------- Umidade - Cartao SD       
       dataFile.print(h); // escrever no arquivo de banco de dados 
-      dataFile.print(" %"); // escrever no arquivo de banco de dados 
+      //dataFile.print(" %"); // escrever no arquivo de banco de dados 
       
       //------- "Enter"
       dataFile.println(); // escrever no arquivo de banco de dados "Enter"
