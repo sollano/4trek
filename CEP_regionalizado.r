@@ -90,7 +90,9 @@ limites.naturais = function(referencia, lista.arquivos, janela = 50){
   
   lst.referencia = media.regionalizada(referencia, janela = janela)
   
-  res.latlon = data.frame(lst.referencia[[2]]$longitude, lst.referencia[[2]]$latitude)
+  res.latlon = data.frame(
+    Longitude = lst.referencia[[2]]$longitude, 
+    Latitude  = lst.referencia[[2]]$latitude  )
   
   res.media = data.frame(lst.referencia[[2]]$media)
   
@@ -104,7 +106,7 @@ limites.naturais = function(referencia, lista.arquivos, janela = 50){
   LNI = media.atividade - 3 * desvpad.atividade
   LNS = media.atividade + 3 * desvpad.atividade
   
-  return(list(janela = janela, lst.referencia[[1]], limites = data.frame(res.latlon, media.atividade, desvpad.atividade, LNI, LNS)))
+  return(list(janela = janela, min.max = lst.referencia[[1]], limites = data.frame(res.latlon, media.atividade, desvpad.atividade, LNI, LNS)))
 }
 
 # Verificar CEP
