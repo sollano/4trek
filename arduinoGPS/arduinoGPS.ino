@@ -13,6 +13,8 @@ SoftwareSerial gpsSerial(3, 2); // pinos do GPS
 
 TinyGPSPlus gps; // variável GPS
 
+int led = 8; // ligar led
+
 void setup()
 {
   Serial.begin(9600); // velocidade da serial do arduino
@@ -43,6 +45,8 @@ void setup()
   dataFile.close(); // fecha o arquivo de banco de dados 
 
   dht.begin(); // inicia sensor temperatura/umidade
+
+   digitalWrite(led, HIGH); // liga a luz (voltagem alta) (digitalWrite aplica voltagem para um pino digital)
 }
 
 
@@ -51,13 +55,27 @@ void loop()
   while (gpsSerial.available() > 0) // faça enquanto o GPS etiver disponível
    if (gps.encode(gpsSerial.read())) // descodifica o sinal recebido pelo GPS
    
-   DadosGps(); // recebe afunção DadosGps onde os dados são processados      
-  
-   if (millis() > 5000 && gps.charsProcessed() < 10) // espera 5000 milisegundos e menos de 10 caracteres processados, se o cartão nao for identificado aparece a mensagem "GPS nao detectado"
+      if (millis() > 5000 && gps.charsProcessed() < 10) // espera 5000 milisegundos e menos de 10 caracteres processados, se o cartão nao for identificado aparece a mensagem "GPS nao detectado"
    {
     Serial.println(F("GPS nao detectado"));  // escrever na serial
     while(true); // executa enquanto for verdade
     }
+
+ // ----Condicional para evitar de se gravar erros de leitura no cartao de memoria----
+    
+    if (gps.location.lat()==0 || gps.location.lng()==0) // se lat ou lng for zero, printar no serial, e nao gravar nada no cartao
+    {
+       Serial.println(F("GPS inicializando leitura..."));  // escrever na serial
+         
+      } else if ( gps.location.lat() > 0 && gps.location.lat() < 2 || gps.location.lng() > 0 && gps.location.lng() < 2 || gps.date.day()==0 ) // se lat ou lng estiver entre zero e 2, ou se o dia for zero, 
+       {                                                                                                                                      // printar no serial e nao gravar nada no cartao
+          Serial.println(F("Erro na leitura do gps"));  // escrever aviso na serial
+        
+        } else // caso contrario
+         {
+          DadosGps(); // rodar a funcao para gravar no cartao
+          }
+    
 }
 
 
