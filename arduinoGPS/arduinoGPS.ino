@@ -26,7 +26,7 @@ void setup()
      Serial.println("Falha no SD Card, ou nao presente");  // escrever na serial
      
      //------------- Cabeçalho sem SD
-     Serial.println("-Latitude- , -Longitude- , --Data--  , --Hora-- , -Velocidade- , -Temperatura- , -Umidade- "); // escrever na serial
+     Serial.println("Latitude,Longitude,Data,Hora,Velocidade,Temperatura,Umidade"); // escrever na serial
      
      return;
      }
@@ -34,12 +34,11 @@ void setup()
   Serial.println("SD Card Inicializado.");  // escrever na serial
 
   //------------- Cabeçalho SD
-  Serial.println("-Latitude- , -Longitude- , --Data--  , --Hora-- , -Velocidade- , -Temperatura- , -Umidade- "); // escrever na serial  
+  Serial.println("Latitude,Longitude,Data,Hora,Velocidade,Temperatura,Umidade"); // escrever na serial  
 
   File dataFile = SD.open("gps.txt", FILE_WRITE); // cria arquivo de dados
   if (dataFile) // abre o arquivo de banco de dados
   {
-  //dataFile.println("-Latitude- , -Longitude- , --Data--  , --Hora-- , -Velocidade- , -Temperatura- , -Umidade- "); // escrever no cartão SD
   dataFile.println("Latitude,Longitude,Data,Hora,Velocidade,Temperatura,Umidade"); // escrever no cartão SD
   }
   dataFile.close(); // fecha o arquivo de banco de dados 
@@ -93,7 +92,7 @@ void DadosGps() // função DadosGps, processamento dos dados do GPS
         
       //----- Latitude e Longitude - Cartao SD     
       dataFile.print(gps.location.lat(), 6); // escrever no arquivo de banco de dados 
-      dataFile.print(F(" , "));  // escrever no arquivo de banco de dados 
+      dataFile.print(F(","));  // escrever no arquivo de banco de dados 
       dataFile.print(gps.location.lng(), 6); // escrever no arquivo de banco de dados
       dataFile.print(F("  , "));  // escrever no arquivo de banco de dados 
       
@@ -103,7 +102,7 @@ void DadosGps() // função DadosGps, processamento dos dados do GPS
       dataFile.print(gps.date.month()); // escrever no arquivo de banco de dados 
       dataFile.print(F("/")); // escrever no arquivo de banco de dados 
       dataFile.print(gps.date.year()); // escrever no arquivo de banco de dados 
-      dataFile.print(F(" , "));  // escrever no arquivo de banco de dados 
+      dataFile.print(F(","));  // escrever no arquivo de banco de dados 
 
       //------ Hora - Cartao SD  
       if (gps.time.hour() < 10) dataFile.print(F("0")); // condição para formatação da hora, adiciona um "0" antes do numero que for menor que 10.
@@ -114,7 +113,7 @@ void DadosGps() // função DadosGps, processamento dos dados do GPS
       dataFile.print(F(":")); // escrever no arquivo de banco de dados 
       if (gps.time.second() < 10) dataFile.print(F("0")); // condição para formatação da hora, adiciona um "0" antes do numero que for menor que 10.
       dataFile.print(gps.time.second()); // escrever no arquivo de banco de dados          
-      dataFile.print(F(" ,   "));  // escrever no arquivo de banco de dados 
+      dataFile.print(F(","));  // escrever no arquivo de banco de dados 
 
       //------- Velocidade - Cartao SD  
       //dataFile.print("Velocidade: "); // escrever no arquivo de banco de dados 
@@ -126,13 +125,11 @@ void DadosGps() // função DadosGps, processamento dos dados do GPS
     
       //------- Temperatura - Cartao SD  
       dataFile.print(t); // escrever no arquivo de banco de dados 
-      //dataFile.print(" *C"); // escrever no arquivo de banco de dados 
-      dataFile.print(F("    ,  ")); // escrever no arquivo de banco de dados 
+      dataFile.print(F(",")); // escrever no arquivo de banco de dados 
 
       //------- Umidade - Cartao SD       
       dataFile.print(h); // escrever no arquivo de banco de dados 
-      //dataFile.print(" %"); // escrever no arquivo de banco de dados 
-      
+        
       //------- "Enter"
       dataFile.println(); // escrever no arquivo de banco de dados "Enter"
       
@@ -145,25 +142,21 @@ void DadosGps() // função DadosGps, processamento dos dados do GPS
 
   
       //------ Latitude e Longitude - Monitor Serial
-      //Serial.print("Latitude: "); // escrever na serial
       Serial.print(gps.location.lat(), 6); // escrever na serial
-      Serial.print(F(" , "));  // escrever na serial
-      //Serial.print("Longitude: "); // escrever na serial
+      Serial.print(F(","));  // escrever na serial
       Serial.print(gps.location.lng(), 6); // escrever na serial
-      Serial.print(F("  , "));  // escrever na serial
+      Serial.print(F(","));  // escrever na serial
       
       //------ Data - Monitor Serial
-      //Serial.print("Data: "); // escrever na serial
       Serial.print(gps.date.day()); // escrever na serial      
       Serial.print(F("/")); // escrever na serial
       Serial.print(gps.date.month()); // escrever na serial
       Serial.print(F("/")); // escrever na serial
       Serial.print(gps.date.year()); // escrever na serial
-      Serial.print(F(" , "));  // escrever na serial
+      Serial.print(F(","));  // escrever na serial
 
       //------ Hora - Monitor Serial
  
-      //Serial.print("Hora: "); // escrever no arquivo de banco de dados 
       if (gps.time.hour() < 10) Serial.print(F("0")); // condição para formatação da hora, adiciona um "0" antes do numero que for menor que 10.
       Serial.print(gps.time.hour()); // escrever no arquivo de banco de dados 
       Serial.print(F(":")); // eescrever no arquivo de banco de dados 
@@ -172,25 +165,21 @@ void DadosGps() // função DadosGps, processamento dos dados do GPS
       Serial.print(F(":")); // escrever no arquivo de banco de dados 
       if (gps.time.second() < 10) Serial.print(F("0")); // condição para formatação da hora, adiciona um "0" antes do numero que for menor que 10.
       Serial.print(gps.time.second()); // escrever no arquivo de banco de dados      
-      Serial.print(F(" ,   "));  // escrever na serial
+      Serial.print(F(","));  // escrever na serial
 
       //------- Velocidade - Monitor Serial
-      //Serial.print("Velocidade: "); // escrever na serial
       Serial.print(gps.speed.kmph()); // escrever na serial
-      Serial.print("km/h"); // escrever na serial
-      Serial.print(F("   ,   "));  // escrever na serial
+      Serial.print(F(","));  // escrever na serial
 
       //------- Rumo/Azimute - Monitor Serial
     
       //------- Temperatura - Cartao SD  
       Serial.print(t); // escrever na serial
-      Serial.print(" *C"); // escrever na serial
-      Serial.print(F("    ,  "));  // escrever na serial
+      Serial.print(F(","));  // escrever na serial
 
       //------- Umidade - Cartao SD       
       Serial.print(h); // escrever na serial
-      Serial.print(" %"); // escrever na serial
-    
+       
       //------- "Enter"
       Serial.println(); // escrever na serial "Enter"
   
