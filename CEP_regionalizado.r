@@ -126,3 +126,64 @@ verificar.dados = function(arquivo, limites){
   arquivo.media$check = check
   return(arquivo.media)
 }
+
+# Limpar dados
+data.cleaner <- function(file){
+  
+  # Remove linhas com o cabecalho adicionais
+  file <- file[file[["Latitude"]] != "Latitude" & !is.na(file[["Latitude"]]),]
+  
+  # Converte valores para numerico
+  file[c("Latitude", "Longitude", "Velocidade", "Temperatura", "Umidade")] <-sapply(
+    file[c("Latitude", "Longitude", "Velocidade", "Temperatura", "Umidade")], 
+    function(x) {as.numeric(as.character(x)) } ) #para se converter fator para numerico,
+  # e preciso converter para character primeiro
+  
+  #remover ou alterar depois... Especifico para os dados utilizados
+  file <- file[file[["Latitude"]] < 0 & file[["Longitude"]] < 0, ]
+  
+  
+  # Remover niveis inutilizados
+  file <- droplevels(file)
+  
+  return(file)
+  
+}
+
+# Plota um grafico comparando todas as medicoes do dado,
+# utilizando a primeira medicao como base
+compara_medicoes <- function(file, janela){
+  
+  file <- data.cleaner(file)
+  
+  ## Transformar dados em lista, baseado na data de coleta
+  file_lista <- split(file, file$Data)
+  
+  valor_janela <- janela
+  
+  length(file_lista)
+  
+  ## Calcular Média regionalizada da primeira medicao
+  trans.rep1 <- media.regionalizada(file_lista[[1]], janela = valor_janela )
+  
+  # calcular media para as demais e salvar em um dataframe
+  file_test_plot <- as.data.frame(do.call(rbind, lapply(file_lista, function(x){
+    
+    y <- media.regionalizada(x, janela=valor_janela, latlon=trans.rep1[[1]])[[2]]
+    y$Data <- x$Data[1]
+    return(y)
+  }  )))
+  
+  # Plotar
+  p <- ggplot2::ggplot(data=file_test_plot, ggplot2::aes(y=latitude, x=longitude)) +
+    ggplot2::geom_raster(ggplot2::aes(fill=media)) + 
+    ggplot2::scale_fill_continuous(na.value = 'white' ) + 
+    ggplot2::facet_wrap(~Data)
+  
+  return(p)
+}
+
+
+
+
+
