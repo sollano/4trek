@@ -91,8 +91,8 @@ limites.naturais = function(referencia, lista.arquivos, janela = 50){
   lst.referencia = media.regionalizada(referencia, janela = janela)
   
   res.latlon = data.frame(
-    Longitude = lst.referencia[[2]]$longitude, 
-    Latitude  = lst.referencia[[2]]$latitude  )
+    longitude = lst.referencia[[2]]$longitude, 
+    latitude  = lst.referencia[[2]]$latitude  )
   
   res.media = data.frame(lst.referencia[[2]]$media)
   
