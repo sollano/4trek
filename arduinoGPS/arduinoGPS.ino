@@ -95,7 +95,7 @@ void DadosGps() // função DadosGps, processamento dos dados do GPS
       dataFile.print(gps.location.lat(), 6); // escrever no arquivo de banco de dados 
       dataFile.print(F(","));  // escrever no arquivo de banco de dados 
       dataFile.print(gps.location.lng(), 6); // escrever no arquivo de banco de dados
-      dataFile.print(F("  , "));  // escrever no arquivo de banco de dados 
+      dataFile.print(F(","));  // escrever no arquivo de banco de dados 
       
       //------ Data - Cartao SD  
       dataFile.print(gps.date.day()); // escrever no arquivo de banco de dados      
@@ -117,10 +117,8 @@ void DadosGps() // função DadosGps, processamento dos dados do GPS
       dataFile.print(F(","));  // escrever no arquivo de banco de dados 
 
       //------- Velocidade - Cartao SD  
-      //dataFile.print("Velocidade: "); // escrever no arquivo de banco de dados 
       dataFile.print(gps.speed.kmph()); // escrever no arquivo de banco de dados 
-      //dataFile.print("km/h"); // escrever no arquivo de banco de dados 
-      dataFile.print(F("   ,   "));  // escrever no arquivo de banco de dados 
+      dataFile.print(F(","));  // escrever no arquivo de banco de dados 
 
       //------- Rumo/Azimute - Monitor Serial
     
