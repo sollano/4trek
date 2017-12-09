@@ -44,7 +44,8 @@ void setup()
   dataFile.close(); // fecha o arquivo de banco de dados 
 
   dht.begin(); // inicia sensor temperatura/umidade
-
+  
+   pinMode(led, OUTPUT); // Determina o modo do led (saida)
    digitalWrite(led, HIGH); // liga a luz (voltagem alta) (digitalWrite aplica voltagem para um pino digital)
 }
 
