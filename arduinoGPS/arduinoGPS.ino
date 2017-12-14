@@ -47,6 +47,7 @@ void setup()
   
    pinMode(led, OUTPUT); // Determina o modo do led (saida)
    digitalWrite(led, HIGH); // liga a luz (voltagem alta) (digitalWrite aplica voltagem para um pino digital)
+  
 }
 
 
@@ -54,8 +55,8 @@ void loop()
 {  
   while (gpsSerial.available() > 0) // faça enquanto o GPS etiver disponível
    if (gps.encode(gpsSerial.read())) // descodifica o sinal recebido pelo GPS
-   
-      if (millis() > 5000 && gps.charsProcessed() < 10) // espera 5000 milisegundos e menos de 10 caracteres processados, se o cartão nao for identificado aparece a mensagem "GPS nao detectado"
+
+       if (millis() > 5000 && gps.charsProcessed() < 10) // espera 5000 milisegundos e menos de 10 caracteres processados, se o cartão nao for identificado aparece a mensagem "GPS nao detectado"
    {
     Serial.println(F("GPS nao detectado"));  // escrever na serial
     while(true); // executa enquanto for verdade
