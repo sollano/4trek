@@ -132,6 +132,9 @@ verificar.dados = function(arquivo, limites){
 # Limpar dados
 data.cleaner <- function(file){
   
+  # Remove espacos no comeco e final dos dados
+  file <- as.data.frame(apply(file, 2, trimws, "both"))
+  
   # Remove linhas com o cabecalho adicionais
   file <- file[file[["Latitude"]] != "Latitude" & !is.na(file[["Latitude"]]),]
   
