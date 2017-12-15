@@ -66,18 +66,18 @@ void loop()
 
  // ----Condicional para evitar de se gravar erros de leitura no cartao de memoria----
     
-    if (gps.location.lat()==0 || gps.location.lng()==0) // se lat ou lng for zero, printar no serial, e nao gravar nada no cartao
-    {
-       Serial.println(F("GPS inicializando leitura..."));  // escrever na serial
+   // if (gps.location.lat()==0 || gps.location.lng()==0) // se lat ou lng for zero, printar no serial, e nao gravar nada no cartao
+   // {
+   //    Serial.println(F("GPS inicializando leitura..."));  // escrever na serial
          
-      } else if ( gps.location.lat() > 0 && gps.location.lat() < 2 || gps.location.lng() > 0 && gps.location.lng() < 2 || gps.date.day()==0 ) // se lat ou lng estiver entre zero e 2, ou se o dia for zero, 
-       {                                                                                                                                      // printar no serial e nao gravar nada no cartao
-          Serial.println(F("Erro na leitura do gps"));  // escrever aviso na serial
+    //  } else if ( gps.location.lat() > 0 && gps.location.lat() < 2 || gps.location.lng() > 0 && gps.location.lng() < 2 || gps.date.day()==0 ) // se lat ou lng estiver entre zero e 2, ou se o dia for zero, 
+     //  {                                                                                                                                      // printar no serial e nao gravar nada no cartao
+      //    Serial.println(F("Erro na leitura do gps"));  // escrever aviso na serial
         
-        } else // caso contrario
-         {
+      //  } else // caso contrario
+      //   {
           DadosGps(); // rodar a funcao para gravar no cartao
-          }
+        //  }
     
 }
 
