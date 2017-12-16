@@ -135,6 +135,9 @@ data.cleaner <- function(file){
   # Remove espacos no comeco e final dos dados
   file <- as.data.frame(apply(file, 2, trimws, "both"))
   
+  # Remove datas em que o dia é zero (erros de medicao)
+  file <- file[as.numeric(format(as.Date(file$Data, format=c("%d/%m/%Y")),"%d"))!=0,]
+  
   # Remove linhas com o cabecalho adicionais
   file <- file[file[["Latitude"]] != "Latitude" & !is.na(file[["Latitude"]]),]
   
@@ -143,6 +146,9 @@ data.cleaner <- function(file){
     file[c("Latitude", "Longitude", "Velocidade", "Temperatura", "Umidade")], 
     function(x) {as.numeric(as.character(x)) } ) #para se converter fator para numerico,
   # e preciso converter para character primeiro
+  
+  #remover medicoes que sao zero (erros de medicao)
+  file <- file[file[["Latitude"]] != 0 & file[["Longitude"]] != 0, ]
   
   #remover ou alterar depois... Especifico para os dados utilizados
   file <- file[file[["Latitude"]] < 0 & file[["Longitude"]] < 0, ]
