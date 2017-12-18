@@ -57,8 +57,10 @@ void loop()
 {  
   while (gpsSerial.available() > 0) // faça enquanto o GPS etiver disponível
    if (gps.encode(gpsSerial.read())) // descodifica o sinal recebido pelo GPS
-
-       if (millis() > 5000 && gps.charsProcessed() < 10) // espera 5000 milisegundos e menos de 10 caracteres processados, se o cartão nao for identificado aparece a mensagem "GPS nao detectado"
+   
+   DadosGps(); // recebe a funcao DadosGps onde os dados sÃ£o processados 
+   
+   if (millis() > 5000 && gps.charsProcessed() < 10) // espera 5000 milisegundos e menos de 10 caracteres processados, se o cartão nao for identificado aparece a mensagem "GPS nao detectado"
    {
     Serial.println(F("GPS nao detectado"));  // escrever na serial
     while(true); // executa enquanto for verdade
@@ -76,7 +78,7 @@ void loop()
         
       //  } else // caso contrario
       //   {
-          DadosGps(); // rodar a funcao para gravar no cartao
+       //   DadosGps(); // rodar a funcao para gravar no cartao
         //  }
     
 }
