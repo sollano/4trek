@@ -151,7 +151,7 @@ data.cleaner <- function(file){
   file <- file[file[["Latitude"]] != 0 & file[["Longitude"]] != 0, ]
   
   #remover ou alterar depois... Especifico para os dados utilizados
-  file <- file[file[["Latitude"]] < 0 & file[["Longitude"]] < 0, ]
+  file <- file[file[["Latitude"]] < -0.5 & file[["Longitude"]] < -0.5, ]
   
   
   # Remover niveis inutilizados
