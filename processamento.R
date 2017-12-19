@@ -4,6 +4,7 @@ library(ggplot2)
 source("CEP_regionalizado.r")
 
 dados_completo <- read.csv("dados/GPS_FINAL_DATA.TXT")
+#dados_completo$Data <- forcats::fct_relevel(dados_completo$Data,"1/12/2017","6/12/2017" )
 
 ## Preparar dados ####
 
@@ -12,7 +13,7 @@ str(dados_completo)
 head(dados_completo)
 
 ## Remover alguns dados
-#dados_completo <- dados_completo[ ! dados_completo$Data %in% c("1/11/2017", "28/11/2017", "31/10/2017"),]
+dados_completo <- dados_completo[ ! dados_completo$Data %in% c("6/12/2017"),]
 
 ## Limpar dados
 dados_completo <- data.cleaner(dados_completo)
@@ -25,8 +26,8 @@ head(dados_completo)
 dados_lista <- split(dados_completo, dados_completo$Data)
 
 ## Determinar a ultima medicao, e a medicao teste
-medicao_teste <- length(dados_lista)
-ultima_med_cont <- length(dados_lista)-1
+#medicao_teste <- length(dados_lista)
+ultima_med_cont <- length(dados_lista) #-1
 
 ## Nomes dos objetos da lista
 names(dados_lista)
@@ -111,14 +112,16 @@ ggsave("plots/media_reg_all_lni.jpg", plot = mp3, width = 12, height = 10)
 
 
 ## Testar os limites com a ultima medição
-teste_1 <- verificar.dados(arquivo = dados_lista[[medicao_teste]], limites = trans.limites)
+#teste_1 <- verificar.dados(arquivo = dados_lista[[medicao_teste]], limites = trans.limites)
+dados_teste <- data.cleaner(read.csv("dados/GPS_13-12.TXT"))
+teste_1 <- verificar.dados(arquivo = dados_teste, limites = trans.limites)
 teste_1
 
 ## Teste 1 grafico
 mp_teste <- ggplot(data=na.omit(teste_1), aes(y=latitude, x=longitude)) +
   geom_raster(aes(fill=check)) + 
   theme_bw() +
-  labs(x="Longitude", y="Latitude") +
+  labs(x="Longitude", y="Latitude",  fill="Controle") +
   theme(
     legend.position = "bottom",
     legend.text = element_text(size = 20), 
