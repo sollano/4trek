@@ -107,7 +107,7 @@ mp3 <- ggplot(data=trans.limites[["limites"]], aes(y=latitude, x=longitude)) +
     strip.text.x = element_text(size = 22)   )
 mp3
 
-ggsave("plots/media_reg_all_lns.jpg", plot = mp3, width = 12, height = 10)
+ggsave("plots/media_reg_all_lni.jpg", plot = mp3, width = 12, height = 10)
 
 
 ## Testar os limites com a ultima medição
@@ -135,7 +135,7 @@ mp_teste <- ggplot(data=na.omit(teste_1), aes(y=latitude, x=longitude)) +
 
 mp_teste
 
-ggsave("plots/media_reg_all_lns.jpg", plot = mp_teste, width = 12, height = 10)
+ggsave("plots/media_teste.jpg", plot = mp_teste, width = 12, height = 10)
 
 
 
