@@ -1,8 +1,8 @@
 ## Preparar dados ####
 source("CEP_regionalizado.r")
-# ultima medicao: 5/12/2017
+# ultima medicao: 6/12/2017
 x <- read.csv("dados/GPS.TXT")
-x$Data <- "6/12/2017"
+x$Data <- "7/12/2017"
 #dados_completo <- read.csv("dados/GPS_fixed.TXT")
 #dados_completo <- read.csv("dados/GPS_FINAL_DATA.TXT")
 dados_completo <- rbind(dados_completo, x)
