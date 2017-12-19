@@ -3,7 +3,7 @@
 library(ggplot2)
 source("CEP_regionalizado.r")
 
-dados_completo <- read.csv("dados/GPS_OK_DATA.TXT")
+dados_completo <- read.csv("dados/GPS_FINAL_DATA.TXT")
 
 ## Preparar dados ####
 
