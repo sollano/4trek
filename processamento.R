@@ -4,7 +4,6 @@ library(ggplot2)
 source("CEP_regionalizado.r")
 
 dados_completo <- read.csv("dados/GPS_FINAL_DATA.TXT")
-#dados_completo$Data <- forcats::fct_relevel(dados_completo$Data,"1/12/2017","6/12/2017" )
 
 ## Preparar dados ####
 
