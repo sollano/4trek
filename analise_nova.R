@@ -1,6 +1,7 @@
 # Dados e pacotes ####
 #install.packages("ggmap")
 library(ggmap)
+library(ggplot2)
 source("CEP_regionalizado.r")
 
 dados_completo <- read.csv("dados/GPS_FINAL_DATA.TXT")
