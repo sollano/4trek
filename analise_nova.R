@@ -74,7 +74,7 @@ mp_mr <- ggmap(google_map) +
   coord_cartesian(x = c(lon$lonmin - 0.001, lon$lonmax + 0.001),
                   y = c(lat$latmin - 0.003, lat$latmax + 0.003)  ) +
   labs(x="Longitude", y="Latitude", fill="Velocidade média (km/h)") +
-  scale_fill_gradient(low = "white", high = "black") +
+  scale_fill_gradient(low = "black", high = "white") +
   ggcanvas
 
 mp_mr
@@ -95,7 +95,7 @@ mp_lim_sup <- ggmap(google_map) +
   coord_cartesian(x = c(lon$lonmin - 0.001, lon$lonmax + 0.001),
                   y = c(lat$latmin - 0.003, lat$latmax + 0.003)  ) +
   labs(x="Longitude", y="Latitude", fill="Limite natural superior") +
-  scale_fill_gradient(low = "white", high = "black") +
+  scale_fill_gradient(low = "black", high = "white") +
   ggcanvas
 
 mp_lim_sup
@@ -109,7 +109,7 @@ mp_lim_inf <- ggmap(google_map) +
   coord_cartesian(x = c(lon$lonmin - 0.001, lon$lonmax + 0.001),
                   y = c(lat$latmin - 0.003, lat$latmax + 0.003)  ) +
   labs(x="Longitude", y="Latitude", fill="Limite natural inferior") +
-  scale_fill_gradient(low = "white", high = "black") +
+  scale_fill_gradient(low = "black", high = "white") +
   ggcanvas
 
 mp_lim_inf
@@ -133,7 +133,7 @@ mp_teste <- ggmap(google_map) +
   coord_cartesian(x = c(lon$lonmin - 0.001, lon$lonmax + 0.001),
                   y = c(lat$latmin - 0.003, lat$latmax + 0.003)  ) +
   labs(x="Longitude", y="Latitude",  fill="Controle") +
-  scale_fill_gradient(low = "white", high = "black") +
+  scale_fill_gradient(low = "black", high = "white") +
   ggcanvas
 
 mp_teste
