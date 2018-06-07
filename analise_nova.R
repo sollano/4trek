@@ -1,7 +1,6 @@
 # Dados e pacotes ####
 #install.packages("ggmap")
 library(ggmap)
-library(ggplot2)
 source("CEP_regionalizado.r")
 
 dados_completo <- read.csv("dados/GPS_FINAL_DATA.TXT")
@@ -45,8 +44,7 @@ ggcanvas <- ggthemes::theme_igray(base_family = "serif") +
     axis.text    = element_text(size = 22),
     axis.line.x = element_line(color="black"),
     axis.line.y = element_line(color="black"),
-    strip.text.x = element_text(size = 22)   )
-
+    strip.text.x = element_text(size = 22)   ) 
 
 # Criar mapa do google da área ####
 
@@ -62,7 +60,7 @@ lat <- trans.rep0[[1]][c("latmin","latmax")]
 bbox <- make_bbox(lon, lat, f=0.05)
 
 # Pegar o mapa da google da caixa
-google_map <- get_map(bbox, maptype = "satellite", source = "google", zoom=14)
+google_map <- get_map(bbox, maptype = "satellite", source = "google", zoom=14,color='bw')
 
 # Mapa da Media regionalizada ####
 
@@ -76,12 +74,13 @@ mp_mr <- ggmap(google_map) +
   coord_cartesian(x = c(lon$lonmin - 0.001, lon$lonmax + 0.001),
                   y = c(lat$latmin - 0.003, lat$latmax + 0.003)  ) +
   labs(x="Longitude", y="Latitude", fill="Velocidade média (km/h)") +
+  scale_fill_gradient(low = "white", high = "black") +
   ggcanvas
 
 mp_mr
 
 # Salvar mapa
-#ggsave("plots/media_reg.png", mp_mr, width = 12, height = 10)
+ggsave("plots/media_reg_bw.png", mp_mr, width = 12, height = 10)
 
 # Mapas dos limites naturais inferior e superior ####
 
@@ -96,12 +95,13 @@ mp_lim_sup <- ggmap(google_map) +
   coord_cartesian(x = c(lon$lonmin - 0.001, lon$lonmax + 0.001),
                   y = c(lat$latmin - 0.003, lat$latmax + 0.003)  ) +
   labs(x="Longitude", y="Latitude", fill="Limite natural superior") +
+  scale_fill_gradient(low = "white", high = "black") +
   ggcanvas
 
 mp_lim_sup
 
 # Salvar o mapa
-#ggsave("plots/lns.png", mp_lim_sup, width = 12, height = 10)
+ggsave("plots/lns_bw.png", mp_lim_sup, width = 12, height = 10)
 
 
 mp_lim_inf <- ggmap(google_map) +
@@ -109,12 +109,13 @@ mp_lim_inf <- ggmap(google_map) +
   coord_cartesian(x = c(lon$lonmin - 0.001, lon$lonmax + 0.001),
                   y = c(lat$latmin - 0.003, lat$latmax + 0.003)  ) +
   labs(x="Longitude", y="Latitude", fill="Limite natural inferior") +
+  scale_fill_gradient(low = "white", high = "black") +
   ggcanvas
 
 mp_lim_inf
 
 # Salvar o mapa
-#ggsave("plots/lni.png", mp_lim_inf, width = 12, height = 10)
+ggsave("plots/lni_bw.png", mp_lim_inf, width = 12, height = 10)
 
 
 
@@ -132,10 +133,11 @@ mp_teste <- ggmap(google_map) +
   coord_cartesian(x = c(lon$lonmin - 0.001, lon$lonmax + 0.001),
                   y = c(lat$latmin - 0.003, lat$latmax + 0.003)  ) +
   labs(x="Longitude", y="Latitude",  fill="Controle") +
+  scale_fill_gradient(low = "white", high = "black") +
   ggcanvas
 
 mp_teste
 
 # Salvar o mapa
-#ggsave("plots/teste_1.png", mp_teste, width = 12, height = 10)
+ggsave("plots/teste_1_bw.png", mp_teste, width = 12, height = 10)
 
